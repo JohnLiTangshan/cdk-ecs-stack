@@ -21,8 +21,8 @@ export class MyPipelineStack extends Stack {
         oauthToken: SecretValue.secretsManager('githubToken'),
         trigger: codepipeline_actions.GitHubTrigger.POLL,
         // Replace these with your actual GitHub project info
-        owner: 'GITHUB-OWNER',
-        repo: 'JohnLiTangshan',
+        owner: 'JohnLiTangshan',
+        repo: 'my-pipeline',
       }),
 
       synthAction: SimpleSynthAction.standardNpmSynth({
