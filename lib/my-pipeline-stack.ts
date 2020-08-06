@@ -28,7 +28,6 @@ export class MyPipelineStack extends Stack {
       synthAction: SimpleSynthAction.standardNpmSynth({
         sourceArtifact,
         cloudAssemblyArtifact,
-        installCommand: 'npm install',
         // Use this if you need a build step (if you're not using ts-node
         // or if you have TypeScript Lambdas that need to be compiled).
         buildCommand: 'npm run build',
