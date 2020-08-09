@@ -35,7 +35,7 @@ test('it create a database instance', () => {
 
     // THEN
     expect(stack).to(haveResource('AWS::RDS::DBInstance', {
-        "DBInstanceClass": "db.t2.micro",
+        "DBInstanceClass": "db.t2.small",
         "Engine": "aurora-mysql",
         "EngineVersion": "5.7.12",
         "PubliclyAccessible": false
