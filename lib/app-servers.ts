@@ -16,7 +16,7 @@ export class AppServers extends Construct {
 
         const cluster = new Cluster(this, 'AppCluster', {
             vpc: props.vpc,
-            clusterName: 'Demo Cluster'
+            clusterName: 'DemoCluster'
         });
         const autoscalingGroup = cluster.addCapacity('clusterCapacity', {
             instanceType: InstanceType.of(InstanceClass.BURSTABLE2, InstanceSize.MICRO),
