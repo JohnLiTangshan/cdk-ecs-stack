@@ -1,33 +1,35 @@
 import { Stack } from '@aws-cdk/core';
 import '@aws-cdk/assert/jest';
 import { AppVpc } from '../lib/app-vpc';
-import { arrayWith, countResources, countResourcesLike, expect as cdkExpect, haveResource } from '@aws-cdk/assert';
+import { arrayWith, countResources, countResourcesLike, expect, haveResource } from '@aws-cdk/assert';
 import'@aws-cdk/assert/lib';
 
-let stack: Stack;
-beforeEach(() => {
-    // WHEN
-    stack = new Stack();
-    new AppVpc(stack, 'AppVpc');
-})
-
 test('vpc is created', () => {
+    // WHEN
+    const stack = new Stack();
+    new AppVpc(stack, 'AppVpc');
     // THEN
-    cdkExpect(stack).to(haveResource('AWS::EC2::VPC', {
+    expect(stack).to(haveResource('AWS::EC2::VPC', {
         'EnableDnsHostnames': true,
         'EnableDnsSupport': true
     }));
 });
 
 test('it has 4 subnets', () => {
+    // WHEN
+    const stack = new Stack();
+    new AppVpc(stack, 'AppVpc');
     // THEN
-    cdkExpect(stack).to(countResources('AWS::EC2::Subnet', 4));
+    expect(stack).to(countResources('AWS::EC2::Subnet', 4));
 
 });
 
 test('it creates 2 public subnets', () => {
+    // WHEN
+    const stack = new Stack();
+    new AppVpc(stack, 'AppVpc');
     // THEN
-    cdkExpect(stack).to(countResourcesLike('AWS::EC2::Subnet', 2, {
+    expect(stack).to(countResourcesLike('AWS::EC2::Subnet', 2, {
         'Tags': arrayWith({
             "Key": "aws-cdk:subnet-type",
             "Value": "Public"
@@ -35,22 +37,31 @@ test('it creates 2 public subnets', () => {
     }));
 });
 
-test('it creates 2 isolated subnets', () => {
+test('it creates 2 private subnets', () => {
+    // WHEN
+    const stack = new Stack();
+    new AppVpc(stack, 'AppVpc');
    // THEN
-   cdkExpect(stack).to(countResourcesLike('AWS::EC2::Subnet', 2, {
+   expect(stack).to(countResourcesLike('AWS::EC2::Subnet', 2, {
     'Tags': arrayWith({
         "Key": "aws-cdk:subnet-type",
-        "Value": "Isolated"
+        "Value": "Private"
       })
     }));
 });
 
 test('it create a internet gateway', () => {
+    // WHEN
+    const stack = new Stack();
+    new AppVpc(stack, 'AppVpc');
     // THEN
-    cdkExpect(stack).to(haveResource('AWS::EC2::InternetGateway'));
+    expect(stack).to(haveResource('AWS::EC2::InternetGateway'));
 });
 
-test('no nat gateway is created', () => {
+test('1 nat gateway is created', () => {
+    // WHEN
+    const stack = new Stack();
+    new AppVpc(stack, 'AppVpc');
     // THEN
-    cdkExpect(stack).to(countResources('AWS::EC2::NatGateway', 0));
+    expect(stack).to(countResources('AWS::EC2::NatGateway', 1));
 });
