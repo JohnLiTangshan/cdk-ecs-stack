@@ -25,7 +25,7 @@ export class Database extends Construct {
             },
             instances: 1,
             instanceProps: {
-              instanceType: ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MICRO),
+              instanceType: ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.SMALL),
               vpcSubnets: {
                 subnetType: ec2.SubnetType.PRIVATE,
               },
