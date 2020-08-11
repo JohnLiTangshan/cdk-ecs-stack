@@ -7,7 +7,10 @@ import'@aws-cdk/assert/lib';
 test('vpc is created', () => {
     // WHEN
     const stack = new Stack();
-    new AppVpc(stack, 'AppVpc');
+    new AppVpc(stack, 'AppVpc', {
+        maxAzs: 2,
+        natGateways: 1
+    });
     // THEN
     expect(stack).to(haveResource('AWS::EC2::VPC', {
         'EnableDnsHostnames': true,
@@ -18,7 +21,10 @@ test('vpc is created', () => {
 test('it has 4 subnets', () => {
     // WHEN
     const stack = new Stack();
-    new AppVpc(stack, 'AppVpc');
+    new AppVpc(stack, 'AppVpc', {
+        maxAzs: 2,
+        natGateways: 1
+    });
     // THEN
     expect(stack).to(countResources('AWS::EC2::Subnet', 4));
 
@@ -27,7 +33,10 @@ test('it has 4 subnets', () => {
 test('it creates 2 public subnets', () => {
     // WHEN
     const stack = new Stack();
-    new AppVpc(stack, 'AppVpc');
+    new AppVpc(stack, 'AppVpc', {
+        maxAzs: 2,
+        natGateways: 1
+    });
     // THEN
     expect(stack).to(countResourcesLike('AWS::EC2::Subnet', 2, {
         'Tags': arrayWith({
@@ -40,7 +49,10 @@ test('it creates 2 public subnets', () => {
 test('it creates 2 private subnets', () => {
     // WHEN
     const stack = new Stack();
-    new AppVpc(stack, 'AppVpc');
+    new AppVpc(stack, 'AppVpc', {
+        maxAzs: 2,
+        natGateways: 1
+    });
    // THEN
    expect(stack).to(countResourcesLike('AWS::EC2::Subnet', 2, {
     'Tags': arrayWith({
@@ -53,7 +65,10 @@ test('it creates 2 private subnets', () => {
 test('it create a internet gateway', () => {
     // WHEN
     const stack = new Stack();
-    new AppVpc(stack, 'AppVpc');
+    new AppVpc(stack, 'AppVpc', {
+        maxAzs: 2,
+        natGateways: 1
+    });
     // THEN
     expect(stack).to(haveResource('AWS::EC2::InternetGateway'));
 });
@@ -61,7 +76,10 @@ test('it create a internet gateway', () => {
 test('1 nat gateway is created', () => {
     // WHEN
     const stack = new Stack();
-    new AppVpc(stack, 'AppVpc');
+    new AppVpc(stack, 'AppVpc', {
+        maxAzs: 2,
+        natGateways: 1
+    });
     // THEN
     expect(stack).to(countResources('AWS::EC2::NatGateway', 1));
 });

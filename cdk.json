@@ -5,6 +5,28 @@
     "aws-cdk:enableDiffNoFail": "true",
     "@aws-cdk/core:newStyleStackSynthesis": "true",
     "repoOwner": "JohnLiTangshan",
-    "repo": "my-pipeline"
+    "repo": "my-pipeline",
+    "natGateways": 1,
+    "maxAzs": 2,
+    "dbInstanceClass": "t2",
+    "dbInstanceSize": "small",
+    "dbMinCapacity": 1,
+    "dbMaxCapacity": 3, 
+    "dbCpuTarget": 50,
+
+    "appInstanceClass": "t2",
+    "appInstanceSize": "micro",
+    "instanceMinCapacity": 1,
+    "instanceMaxCapacity": 3,
+    "instanceDesiredCapacity": 1,
+    "instanceAutoScalingTargetCpuUtilizationPercent": 60,
+
+    "taskMemoryLimit": 512,
+    "taskCpu": 256,
+    "taskDesiredCount": 1,
+    "taskMinCapacity": 1,
+    "taskMaxCapacity": 3,
+    "taskCpuTargetUtilizationPercent": 60
+
   }
 }
