@@ -1,6 +1,6 @@
 import { Stack, App } from '@aws-cdk/core';
 import '@aws-cdk/assert/jest';
-import { expect, haveResource, haveResourceLike } from '@aws-cdk/assert';
+import { expect, haveResource, haveResourceLike, countResourcesLike } from '@aws-cdk/assert';
 import'@aws-cdk/assert/lib';
 import { Vpc } from '@aws-cdk/aws-ec2';
 import { Database } from '../lib/database';
@@ -23,7 +23,7 @@ test('it create a database cluster', () => {
     }));
 });
 
-test('it create a database instance with default value', () => {
+test('it create 2 database instance with default value', () => {
     // GIVEN
     const stack = new Stack();
     const vpc = new Vpc(stack, 'vpc', {
@@ -34,7 +34,7 @@ test('it create a database instance with default value', () => {
     });
 
     // THEN
-    expect(stack).to(haveResource('AWS::RDS::DBInstance', {
+    expect(stack).to(countResourcesLike('AWS::RDS::DBInstance', 2, {
         "DBInstanceClass": "db.t2.small",
         "Engine": "aurora-mysql",
         "EngineVersion": "5.7.12",
@@ -47,7 +47,8 @@ test('it create a database instance with context', () => {
     const app = new App({
         context: {
             dbInstanceClass: 't3',
-            dbInstanceSize: 'large'
+            dbInstanceSize: 'large',
+            dbInstances: 3
         }
     })
     const stack = new Stack(app);
@@ -59,7 +60,7 @@ test('it create a database instance with context', () => {
     });
 
     // THEN
-    expect(stack).to(haveResource('AWS::RDS::DBInstance', {
+    expect(stack).to(countResourcesLike('AWS::RDS::DBInstance', 3, {
         "DBInstanceClass": "db.t3.large",
         "Engine": "aurora-mysql",
         "EngineVersion": "5.7.12",

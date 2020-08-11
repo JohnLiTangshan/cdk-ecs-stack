@@ -57,7 +57,8 @@ npx cdk bootstrap --profile ADMIN-PROFILE ^
     --trust PIPELINE-ACCOUNT-ID ^
     aws://ACCOUNT-ID/REGION
 ```
-* Run cdk deploy
+* Run cdk deploy to deploy this project
+* Run npm run test to run test
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
