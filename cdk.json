@@ -6,10 +6,12 @@
     "@aws-cdk/core:newStyleStackSynthesis": "true",
     "repoOwner": "JohnLiTangshan",
     "repo": "my-pipeline",
+
     "natGateways": 1,
     "maxAzs": 2,
     "dbInstanceClass": "t2",
     "dbInstanceSize": "small",
+    "dbInstances": 2,
     "dbMinCapacity": 1,
     "dbMaxCapacity": 3, 
     "dbCpuTarget": 50,
