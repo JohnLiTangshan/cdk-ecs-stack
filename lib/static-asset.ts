@@ -1,4 +1,4 @@
-import { Construct } from "@aws-cdk/core";
+import { Construct, RemovalPolicy } from "@aws-cdk/core";
 import { Bucket } from "@aws-cdk/aws-s3";
 import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as origins from '@aws-cdk/aws-cloudfront-origins';
@@ -11,7 +11,7 @@ export class StaticAsset extends Construct {
     constructor(scope: Construct, id: string) {
         super(scope, id);
         const myBucket = new Bucket(this, 'StaticBucket', {
-            versioned: true
+            removalPolicy: RemovalPolicy.DESTROY
         });
 
         new cloudfront.Distribution(this, 'myDist', {

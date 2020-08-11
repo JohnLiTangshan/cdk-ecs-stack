@@ -7,11 +7,7 @@ import { StaticAsset } from '../lib/static-asset';
 test('it should create a bucket', () => {
     const stack = new Stack();
     new StaticAsset(stack, 'staticAsset');
-    expect(stack).to(haveResource('AWS::S3::Bucket', {
-        'VersioningConfiguration': {
-            'Status': 'Enabled'
-        }
-    }));
+    expect(stack).to(haveResource('AWS::S3::Bucket'));
 });
 
 test('it should create a cloudfront distribution', () => {

@@ -12,7 +12,14 @@ export class DemoApplicationStack extends Stack {
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
-        const appVpc = new AppVpc(this, 'AppVpc');
+
+        const natGateways = this.node.tryGetContext('natGateways') ?? 1;
+        const maxAzs = this.node.tryGetContext('maxAzs') ?? 2;
+
+        const appVpc = new AppVpc(this, 'AppVpc', {
+            maxAzs,
+            natGateways
+        });
         new AppServers(this, 'AppServers', {
             vpc: appVpc.vpc
         });
