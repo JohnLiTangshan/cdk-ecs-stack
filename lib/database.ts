@@ -19,6 +19,7 @@ export class Database extends Construct {
         super(scope, id);
         const dbInstanceClass = this.node.tryGetContext('dbInstanceClass') ?? 't2';
         const dbInstanceSize = this.node.tryGetContext('dbInstanceSize') ?? 'small';
+        const dbInstances = this.node.tryGetContext('dbInstances') ?? 2;
         const dbMinCapacity = this.node.tryGetContext('dbMinCapacity') ?? 1;
         const dbMaxCapacity = this.node.tryGetContext('dbMaxCapacity') ?? 3;
         const dbCpuTarget = this.node.tryGetContext('dbCpuTarget') ?? 50;
@@ -29,7 +30,7 @@ export class Database extends Construct {
             masterUser: {
               username: 'clusteradmin'
             },
-            instances: 1,
+            instances: dbInstances,
             instanceProps: {
               instanceType: ec2.InstanceType.of(dbInstanceClass, dbInstanceSize),
               vpcSubnets: {
