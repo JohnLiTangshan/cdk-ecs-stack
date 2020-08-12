@@ -5,7 +5,7 @@
     "aws-cdk:enableDiffNoFail": "true",
     "@aws-cdk/core:newStyleStackSynthesis": "true",
     "repoOwner": "JohnLiTangshan",
-    "repo": "my-pipeline",
+    "repo": "cdk-ecs-stack",
 
     "natGateways": 1,
     "maxAzs": 2,
