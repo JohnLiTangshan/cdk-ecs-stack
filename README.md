@@ -57,6 +57,9 @@ npx cdk bootstrap --profile ADMIN-PROFILE ^
     --trust PIPELINE-ACCOUNT-ID ^
     aws://ACCOUNT-ID/REGION
 ```
+* Update repoOwner in cdk.json to your own name.
+* Update repo in cdk.json to your own github repo.
+* Create a secret in AWS Secret Manager, the secret name is githubToken, value is the github token which will allow Codepipeline to pull code from your repository.
 * Run cdk deploy to deploy this project
 * Run npm run test to run test
 
